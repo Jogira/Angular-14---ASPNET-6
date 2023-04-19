@@ -9,6 +9,6 @@ namespace Fullstack.API.Data
         {
         }
 
-        public DbSet<Employee>  MyProperty { get; set; }
+        public DbSet<Employee>  Employees { get; set; }
     }
 }
