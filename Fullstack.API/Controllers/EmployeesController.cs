@@ -1,4 +1,5 @@
 ﻿using Fullstack.API.Data;
+using Fullstack.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,17 @@ namespace Fullstack.API.Controllers
             var employees = await _fullStackDbContext.Employees.ToListAsync();
 
             return Ok(employees);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmployee([FromBody] Employee employeeRequest )
+        {
+            employeeRequest.Id = Guid.NewGuid();
+
+            await  _fullStackDbContext.Employees.AddAsync( employeeRequest );
+            await _fullStackDbContext.SaveChangesAsync();
+
+            return Ok(employeeRequest);
         }
     }
 }
