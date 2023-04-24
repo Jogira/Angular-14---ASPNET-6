@@ -25,11 +25,11 @@ namespace Fullstack.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee([FromBody] Employee employeeRequest )
+        public async Task<IActionResult> AddEmployee([FromForm] Employee employeeRequest)
         {
             employeeRequest.Id = Guid.NewGuid();
 
-            await  _fullStackDbContext.Employees.AddAsync( employeeRequest );
+            await _fullStackDbContext.Employees.AddAsync(employeeRequest);
             await _fullStackDbContext.SaveChangesAsync();
 
             return Ok(employeeRequest);
