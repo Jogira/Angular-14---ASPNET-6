@@ -53,4 +53,15 @@ export class EditEmployeeComponent {
       );
   }
 
+  deleteEmployee(id: string) {
+    this.employeeService.deleteEmployee(id)
+      .subscribe(
+        {
+          next: (response) => {
+            this.router.navigate(['employees']);
+          }
+        }
+      );
+  }
+
 }
