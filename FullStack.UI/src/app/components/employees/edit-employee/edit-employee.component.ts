@@ -1,6 +1,6 @@
 import { EmployeesService } from 'src/app/services/employees.service';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class EditEmployeeComponent {
       salary: 0,
       department: ''
     };
-  constructor(private route: ActivatedRoute, private employeeService: EmployeesService) { }
+  constructor(private route: ActivatedRoute, private employeeService: EmployeesService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
@@ -41,4 +41,16 @@ export class EditEmployeeComponent {
       }
     )
   }
+
+  updateEmployee() {
+    this.employeeService.updateEmployee(this.employeeDetails.id, this.employeeDetails)
+      .subscribe(
+        {
+          next: (response) => {
+            this.router.navigate(['employees']);
+          }
+        }
+      );
+  }
+
 }
